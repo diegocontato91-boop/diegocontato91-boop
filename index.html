@@ -1,0 +1,626 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Diego Rosa | Designer Gráfico Premium</title>
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Syne:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        dark: '#000000',
+                        accent: '#00FF00', // Neon Green
+                        surface: 'rgba(10, 10, 10, 0.6)',
+                        grayish: 'rgba(26, 26, 26, 0.4)',
+                        line: 'rgba(255, 255, 255, 0.05)',
+                    },
+                    fontFamily: {
+                        display: ['Syne', 'sans-serif'],
+                        sans: ['Plus Jakarta Sans', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+
+    <!-- Swiper CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    
+    <!-- GSAP -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&display=swap');
+
+        body {
+            background-color: #000000;
+            background-image: linear-gradient(rgba(0, 0, 0, 0.85), rgba(0, 0, 0, 0.85)), url('https://lh3.googleusercontent.com/d/1-c7-_LywyjtSEpKDVmX6VfMi22Vjgrfc');
+            background-attachment: fixed;
+            background-size: cover;
+            background-position: center;
+            color: #ffffff;
+            overflow-x: hidden;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+
+        .glass {
+            background: rgba(255, 255, 255, 0.02);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .text-gradient {
+            background: linear-gradient(to right, #ffffff, #00FF00);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .bento-item {
+            background: rgba(10, 10, 10, 0.4);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .bento-item:hover {
+            transform: translateY(-5px);
+            border-color: rgba(0, 255, 0, 0.3);
+            background: rgba(20, 20, 20, 0.6);
+        }
+
+        .marquee-content {
+            display: flex;
+            animation: marquee 40s linear infinite;
+        }
+
+        @keyframes marquee {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+
+        .cta-pulse {
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(0, 255, 0, 0.4); }
+            70% { box-shadow: 0 0 0 20px rgba(0, 255, 0, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(0, 255, 0, 0); }
+        }
+
+        .green-glow {
+            filter: drop-shadow(0 0 15px rgba(0, 255, 0, 0.3));
+        }
+
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #000000;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #00FF00;
+            border-radius: 10px;
+        }
+
+        /* Custom Swiper Styles for Gallery */
+        .gallery-container {
+            position: relative;
+            padding: 3rem 1rem;
+        }
+
+        @media (min-width: 768px) {
+            .gallery-container {
+                padding: 5rem 2rem;
+            }
+        }
+
+        .vip-swiper-gallery {
+            padding: 1rem 0 3rem 0 !important;
+        }
+
+        .vip-swiper-gallery .swiper-slide {
+            transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        .vip-swiper-gallery .swiper-slide-active {
+            z-index: 10;
+        }
+
+        .swiper-button-next, .swiper-button-prev {
+            background: #00FF00 !important;
+            width: 40px !important;
+            height: 40px !important;
+            border-radius: 10px;
+            color: black !important;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 10px 20px rgba(0, 255, 0, 0.2);
+            top: 50% !important;
+            transform: translateY(-50%);
+        }
+
+        @media (min-width: 768px) {
+            .swiper-button-next, .swiper-button-prev {
+                width: 50px !important;
+                height: 50px !important;
+                border-radius: 14px;
+            }
+        }
+
+        .swiper-button-next:hover, .swiper-button-prev:hover {
+            transform: translateY(-50%) scale(1.15);
+            box-shadow: 0 15px 30px rgba(0, 255, 0, 0.4);
+        }
+
+        .swiper-button-prev { left: -10px !important; }
+        .swiper-button-next { right: -10px !important; }
+
+        .swiper-button-next:after, .swiper-button-prev:after {
+            font-size: 18px !important;
+            font-weight: 900;
+        }
+
+        .swiper-pagination {
+            bottom: 0 !important;
+        }
+
+        .swiper-pagination-bullet {
+            background: white !important;
+            opacity: 0.1 !important;
+            width: 10px !important;
+            height: 10px !important;
+            margin: 0 6px !important;
+            transition: all 0.3s ease;
+        }
+
+        .swiper-pagination-bullet-active {
+            background: #00FF00 !important;
+            opacity: 1 !important;
+            width: 30px !important;
+            border-radius: 5px !important;
+            box-shadow: 0 0 15px rgba(0, 255, 0, 0.5);
+        }
+
+        .gallery-item {
+            border-radius: 1rem;
+            overflow: hidden;
+            aspect-ratio: 4/5;
+            box-shadow: 0 40px 80px rgba(0,0,0,0.9);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            background: transparent;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header -->
+    <header class="fixed top-0 left-0 w-full z-50 glass h-12 md:h-16 px-6 md:px-12 flex justify-between items-center">
+        <div class="h-24 md:h-40 flex items-center">
+            <img src="https://lh3.googleusercontent.com/d/12WT_GRN_R6ejtJXzCCb29grskJelceA4" alt="Logo" class="h-full w-auto object-contain" referrerPolicy="no-referrer">
+        </div>
+        <nav class="hidden md:flex gap-10 text-xs font-bold uppercase tracking-[0.2em] text-white/50">
+            <a href="#home" class="hover:text-accent transition-colors">Início</a>
+            <a href="#services" class="hover:text-accent transition-colors">O Pack</a>
+            <a href="#about" class="hover:text-accent transition-colors">Diego</a>
+            <a href="#contact" class="hover:text-accent transition-colors">Contato</a>
+        </nav>
+        <a href="https://www.instagram.com/diegorosa.dsg/" target="_blank" class="bg-accent text-dark px-8 py-2.5 rounded-full font-bold text-xs uppercase tracking-widest hover:scale-105 transition-all duration-300">
+            Acessar Agora
+        </a>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="home" class="relative min-h-screen flex items-end justify-center pb-20 overflow-hidden bg-black">
+        <!-- Background Image -->
+        <div class="absolute inset-0 z-0">
+            <img src="https://lh3.googleusercontent.com/d/1he3pewa5VmgRAGD39k51YgXfEV6VeX0p" alt="Banner" class="w-full h-full object-cover object-top opacity-100" referrerPolicy="no-referrer">
+            <div class="absolute inset-0 bg-gradient-to-t from-dark via-transparent to-transparent"></div>
+        </div>
+
+        <!-- Abstract Glows -->
+        <div class="absolute top-1/4 -left-20 w-96 h-96 bg-accent/10 rounded-full blur-[120px]"></div>
+        <div class="absolute bottom-1/4 -right-20 w-96 h-96 bg-accent/5 rounded-full blur-[120px]"></div>
+
+        <div class="relative z-10 text-center w-full">
+            <div class="hero-btn flex flex-col md:flex-row gap-6 justify-center items-center">
+                <button class="cta-pulse bg-accent text-dark px-12 py-5 rounded-full font-bold text-sm uppercase tracking-[0.1em] hover:scale-105 transition-transform">
+                    Garantir Meu Acesso
+                </button>
+                <button class="border border-white/10 bg-white/5 hover:bg-white/10 px-12 py-5 rounded-full font-bold text-sm uppercase tracking-[0.1em] transition-all">
+                    Ver Conteúdo
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Authority Marquee -->
+    <div class="py-10 border-y border-white/5 overflow-hidden bg-surface">
+        <div class="marquee-content flex gap-16 items-center whitespace-nowrap">
+            <span class="text-3xl md:text-5xl font-display font-bold text-white/10 uppercase tracking-tighter italic">Pack Elite</span>
+            <span class="text-accent text-xl">✦</span>
+            <span class="text-3xl md:text-5xl font-display font-bold text-white/10 uppercase tracking-tighter italic">Diego Rosa Designer</span>
+            <span class="text-accent text-xl">✦</span>
+            <span class="text-3xl md:text-5xl font-display font-bold text-white/10 uppercase tracking-tighter italic">Pack Elite</span>
+            <span class="text-accent text-xl">✦</span>
+            <span class="text-3xl md:text-5xl font-display font-bold text-white/10 uppercase tracking-tighter italic">Diego Rosa Designer</span>
+            <span class="text-accent text-xl">✦</span>
+            <span class="text-3xl md:text-5xl font-display font-bold text-white/10 uppercase tracking-tighter italic">Pack Elite</span>
+            <span class="text-accent text-xl">✦</span>
+            <span class="text-3xl md:text-5xl font-display font-bold text-white/10 uppercase tracking-tighter italic">Diego Rosa Designer</span>
+            <span class="text-accent text-xl">✦</span>
+            <span class="text-3xl md:text-5xl font-display font-bold text-white/10 uppercase tracking-tighter italic">Pack Elite</span>
+            <span class="text-accent text-xl">✦</span>
+            <span class="text-3xl md:text-5xl font-display font-bold text-white/10 uppercase tracking-tighter italic">Diego Rosa Designer</span>
+            <span class="text-accent text-xl">✦</span>
+        </div>
+    </div>
+
+    <!-- Bento Grid Section -->
+    <section id="services" class="py-32 px-6 md:px-12 max-w-7xl mx-auto">
+        <div class="mb-20 text-center reveal">
+            <h2 class="text-4xl md:text-7xl font-display font-bold tracking-tighter mb-6">O QUE VOCÊ <span class="text-accent italic">RECEBE</span></h2>
+            <p class="text-white/30 max-w-2xl mx-auto text-lg">Tudo o que você precisa para sair do amadorismo e entrar no mercado de elite do design nacional.</p>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+            <!-- Item 1 -->
+            <div class="bento-item relative rounded-[2rem] p-6 flex items-center gap-4 reveal overflow-hidden h-[380px]">
+                <div class="absolute top-6 right-6 text-5xl font-display font-black bg-gradient-to-b from-accent to-[#064e3b] bg-clip-text text-transparent opacity-40 select-none leading-none z-0">PACK 1</div>
+                <div class="w-[48%] flex justify-center z-10">
+                    <img src="https://lh3.googleusercontent.com/d/1sh5b8PKumwjKpf-6YVvwPK0GuR-_Ejw4" class="max-h-[320px] w-auto drop-shadow-[0_25px_25px_rgba(0,255,0,0.15)] transform -rotate-2" alt="Pack 1" referrerPolicy="no-referrer">
+                </div>
+                <div class="w-[52%] text-left z-10 pr-2">
+                    <h3 class="text-xl font-display font-bold text-accent mb-2 uppercase tracking-tighter">Masterclass Photoshop</h3>
+                    <p class="text-white text-xs font-bold leading-tight uppercase">Aprenda o meu workflow completo. Do zero à finalização de artes que vendem por valores premium.</p>
+                </div>
+            </div>
+
+            <!-- Item 2 -->
+            <div class="bento-item relative rounded-[2rem] p-6 flex items-center gap-4 reveal overflow-hidden h-[380px]">
+                <div class="absolute top-6 right-6 text-5xl font-display font-black bg-gradient-to-b from-accent to-[#064e3b] bg-clip-text text-transparent opacity-40 select-none leading-none z-0">PACK 2</div>
+                <div class="w-[48%] flex justify-center z-10">
+                    <img src="https://lh3.googleusercontent.com/d/1w0y_-tE6XYIUjsEeRGJoHSo4cIPiEovh" class="max-h-[320px] w-auto drop-shadow-[0_25px_25px_rgba(0,255,0,0.15)] transform rotate-2" alt="Pack 2" referrerPolicy="no-referrer">
+                </div>
+                <div class="w-[52%] text-left z-10 pr-2">
+                    <h3 class="text-xl font-display font-bold text-accent mb-2 uppercase tracking-tighter">Suporte VIP</h3>
+                    <p class="text-white text-xs font-bold leading-tight uppercase">Grupo exclusivo para alunos trocarem experiências, feedbacks e networking de alto nível.</p>
+                </div>
+            </div>
+
+            <!-- Item 3 -->
+            <div class="bento-item relative rounded-[2rem] p-6 flex items-center gap-4 reveal overflow-hidden h-[380px]">
+                <div class="absolute top-6 right-6 text-5xl font-display font-black bg-gradient-to-b from-accent to-[#064e3b] bg-clip-text text-transparent opacity-40 select-none leading-none z-0">PACK 3</div>
+                <div class="w-[48%] flex justify-center z-10">
+                    <img src="https://lh3.googleusercontent.com/d/1h2kkwT6qzBEE6rtcZuQ0ZNlVZQuL9VuD" class="max-h-[320px] w-auto drop-shadow-[0_25px_25px_rgba(0,255,0,0.15)] transform -rotate-2" alt="Pack 3" referrerPolicy="no-referrer">
+                </div>
+                <div class="w-[52%] text-left z-10 pr-2">
+                    <h3 class="text-xl font-display font-bold text-accent mb-2 uppercase tracking-tighter">Atualizações</h3>
+                    <p class="text-white text-xs font-bold leading-tight uppercase">Novos conteúdos, recursos e elementos autorais adicionados mensalmente sem custo extra.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Flyers Gallery Section -->
+    <div class="max-w-[1600px] mx-auto px-6 md:px-12 space-y-12 my-12">
+        <!-- Gallery 1: Shows & Events -->
+        <section class="py-24 px-6 md:px-12 bg-surface rounded-3xl reveal">
+            <div class="gallery-container flex flex-col h-full">
+                <div class="text-center mb-12 min-h-[100px] flex flex-col justify-center">
+                    <h2 class="text-4xl md:text-5xl font-display font-bold tracking-tighter mb-4 uppercase">FLYERS PARA EVENTOS</h2>
+                    <p class="text-white/40 max-w-2xl mx-auto text-sm">Aprenda a criar Flyers incríveis que são aprovados de primeira até pelos clientes mais exigentes.</p>
+                </div>
+
+                <div class="relative px-4 md:px-12">
+                    <div class="swiper vip-swiper-gallery">
+                        <div class="swiper-wrapper">
+                            <div class="swiper-slide">
+                                <div class="gallery-item">
+                                    <img src="https://lh3.googleusercontent.com/d/18CpNpxup_R1kuo3BcLrIq9as9cjKeqyk" class="w-full h-full object-cover" alt="Arte VIP 1" referrerPolicy="no-referrer">
+                                </div>
+                            </div>
+                            <div class="swiper-slide">
+                                <div class="gallery-item">
+                                    <img src="https://lh3.googleusercontent.com/d/1WE18pHlK1A80UkbUYmKAP28gaekZ1j_D" class="w-full h-full object-cover" alt="Arte VIP 2" referrerPolicy="no-referrer">
+                                </div>
+                            </div>
+                            <div class="swiper-slide">
+                                <div class="gallery-item">
+                                    <img src="https://lh3.googleusercontent.com/d/1mRGn9Fx5SuG-3Gmut5sbEQ4VMlEiN652" class="w-full h-full object-cover" alt="Arte VIP 3" referrerPolicy="no-referrer">
+                                </div>
+                            </div>
+                            <div class="swiper-slide">
+                                <div class="gallery-item">
+                                    <img src="https://lh3.googleusercontent.com/d/1CWn48Z4ieStuuo4RVyVAyQez2oU-TA6D" class="w-full h-full object-cover" alt="Arte VIP 4" referrerPolicy="no-referrer">
+                                </div>
+                            </div>
+                            <div class="swiper-slide">
+                                <div class="gallery-item">
+                                    <img src="https://lh3.googleusercontent.com/d/1JwlhPl0hXOL7ECY-ScqlXOvxjyGO-CRw" class="w-full h-full object-cover" alt="Arte VIP 5" referrerPolicy="no-referrer">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Navigation -->
+                    <div class="swiper-button-prev"></div>
+                    <div class="swiper-button-next"></div>
+                    
+                    <!-- Pagination -->
+                    <div class="swiper-pagination mt-10 relative bottom-0"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Gallery 2: Artistas -->
+        <section class="py-24 px-6 md:px-12 bg-surface rounded-3xl reveal">
+            <div class="gallery-container flex flex-col h-full">
+                <div class="text-center mb-12 min-h-[100px] flex flex-col justify-center">
+                    <h2 class="text-4xl md:text-5xl font-display font-bold tracking-tighter mb-4 uppercase">FLYERS PARA ARTISTAS</h2>
+                    <p class="text-white/40 max-w-2xl mx-auto text-sm">Artes exclusivas focadas no branding e na identidade visual de grandes artistas.</p>
+                </div>
+
+                <div class="relative px-4 md:px-12">
+                    <div class="swiper vip-swiper-gallery">
+                        <div class="swiper-wrapper">
+                            <div class="swiper-slide">
+                                <div class="gallery-item">
+                                    <img src="https://lh3.googleusercontent.com/d/1iUQYko2FekO7r58j-svCXwEAjIaJbR3a" class="w-full h-full object-cover" alt="Arte Artista 1" referrerPolicy="no-referrer">
+                                </div>
+                            </div>
+                            <div class="swiper-slide">
+                                <div class="gallery-item">
+                                    <img src="https://lh3.googleusercontent.com/d/1BBa1wRnw0Xl7gp6ankceX0w5iJKvvefy" class="w-full h-full object-cover" alt="Arte Artista 2" referrerPolicy="no-referrer">
+                                </div>
+                            </div>
+                            <div class="swiper-slide">
+                                <div class="gallery-item">
+                                    <img src="https://lh3.googleusercontent.com/d/1nqkGVs4VKp3Fpkyj3ZrcC6NGQlfhJxL_" class="w-full h-full object-cover" alt="Arte Artista 3" referrerPolicy="no-referrer">
+                                </div>
+                            </div>
+                            <div class="swiper-slide">
+                                <div class="gallery-item">
+                                    <img src="https://lh3.googleusercontent.com/d/1u1-HN6M3OWyufqWAVq-RpMqvkQVvIZDh" class="w-full h-full object-cover" alt="Arte Artista 4" referrerPolicy="no-referrer">
+                                </div>
+                            </div>
+                            <div class="swiper-slide">
+                                <div class="gallery-item">
+                                    <img src="https://lh3.googleusercontent.com/d/13fhSryyfX9Ijbg5t8XLvAt4GiwfVtd51" class="w-full h-full object-cover" alt="Arte Artista 5" referrerPolicy="no-referrer">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Navigation -->
+                    <div class="swiper-button-prev"></div>
+                    <div class="swiper-button-next"></div>
+                    
+                    <!-- Pagination -->
+                    <div class="swiper-pagination mt-10 relative bottom-0"></div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- About Section -->
+    <section id="about" class="py-32 px-6 md:px-12 bg-surface relative overflow-hidden">
+        <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-24 items-center">
+            <div class="reveal">
+                <div class="inline-block px-5 py-2 rounded-full border border-accent/20 bg-accent/5 text-accent text-[10px] font-bold uppercase tracking-[0.3em] mb-10">
+                    O Especialista
+                </div>
+                <h2 class="text-6xl md:text-8xl font-display font-bold tracking-tighter mb-10 leading-[0.9]">
+                    DIEGO <br><span class="text-accent italic">ROSA</span>
+                </h2>
+                <div class="space-y-8 text-white/40 text-xl leading-relaxed font-medium">
+                    <p>
+                        Curitibano, 34 anos, e há quase uma década vivendo o design em sua forma mais intensa. Autodidata por natureza e perfeccionista por escolha.
+                    </p>
+                    <p>
+                        Minha missão é encurtar o seu caminho. O que eu demorei 9 anos para aprender, eu compilei em um sistema prático para você aplicar hoje mesmo.
+                    </p>
+                </div>
+                <div class="mt-16 flex flex-wrap gap-12">
+                    <div>
+                        <div class="text-5xl font-display font-bold text-white tracking-tighter">09</div>
+                        <div class="text-[10px] uppercase tracking-[0.3em] text-white/20 mt-2">Anos de Carreira</div>
+                    </div>
+                    <div>
+                        <div class="text-5xl font-display font-bold text-white tracking-tighter">100%</div>
+                        <div class="text-[10px] uppercase tracking-[0.3em] text-white/20 mt-2">Home Office</div>
+                    </div>
+                    <div>
+                        <div class="text-5xl font-display font-bold text-white tracking-tighter">∞</div>
+                        <div class="text-[10px] uppercase tracking-[0.3em] text-white/20 mt-2">Criatividade</div>
+                    </div>
+                </div>
+            </div>
+            <div class="relative reveal">
+                <div class="aspect-[4/5] rounded-[3rem] overflow-hidden border border-white/5 bg-grayish p-4">
+                    <img src="https://lh3.googleusercontent.com/d/1laL0npyNuUKI7F9oKCqCLvr4NFy3QOzb" alt="Diego Rosa" class="w-full h-full object-cover rounded-[2.5rem] grayscale hover:grayscale-0 transition-all duration-1000" referrerPolicy="no-referrer">
+                </div>
+                <!-- Decorative elements -->
+                <div class="absolute -bottom-10 -right-10 w-48 h-48 bg-accent/20 rounded-full blur-[80px]"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing / CTA Section -->
+    <section class="py-32 px-6 md:px-12 bg-dark relative">
+        <div class="max-w-4xl mx-auto glass rounded-[3rem] p-12 md:p-24 text-center relative overflow-hidden reveal">
+            <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-accent to-transparent"></div>
+            
+            <h2 class="text-4xl md:text-7xl font-display font-bold tracking-tighter mb-8">PRONTO PARA O <br><span class="text-accent italic">SISTEMA?</span></h2>
+            <p class="text-white/40 text-lg mb-12 max-w-xl mx-auto">Acesso vitalício ao pack, masterclass e todas as atualizações futuras.</p>
+            
+            <div class="mb-12">
+                <span class="text-white/20 line-through text-2xl mr-4">R$ 997,00</span>
+                <span class="text-6xl md:text-8xl font-display font-bold text-white">R$ 497</span>
+                <span class="text-accent font-bold text-xl">,00</span>
+            </div>
+
+            <button class="cta-pulse bg-accent text-dark w-full md:w-auto px-16 py-6 rounded-full font-bold text-lg uppercase tracking-widest hover:scale-105 transition-transform">
+                Quero Acesso Imediato
+            </button>
+            
+            <p class="mt-8 text-[10px] text-white/20 uppercase tracking-[0.4em]">Pagamento Seguro • Acesso Instantâneo</p>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="contact" class="py-24 px-6 md:px-12 border-t border-white/5 bg-dark">
+        <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-16 items-start">
+            <div class="col-span-1">
+                <div class="h-48 md:h-72 mb-6">
+                    <img src="https://lh3.googleusercontent.com/d/12WT_GRN_R6ejtJXzCCb29grskJelceA4" alt="Logo" class="h-full w-auto object-contain" referrerPolicy="no-referrer">
+                </div>
+                <p class="text-white/30 text-sm leading-relaxed max-w-xs">
+                    Especialista em design para o mercado de entretenimento. Transformando visões em realidade visual desde 2017.
+                </p>
+            </div>
+            
+            <div class="col-span-1">
+                <h4 class="text-xs font-bold uppercase tracking-[0.3em] text-white/20 mb-8">Navegação</h4>
+                <ul class="space-y-4 text-sm font-medium text-white/50">
+                    <li><a href="#home" class="hover:text-accent transition-colors">Início</a></li>
+                    <li><a href="#services" class="hover:text-accent transition-colors">O Pack</a></li>
+                    <li><a href="#about" class="hover:text-accent transition-colors">Sobre Mim</a></li>
+                    <li><a href="https://www.instagram.com/diegorosa.dsg/" target="_blank" class="hover:text-accent transition-colors">Instagram</a></li>
+                </ul>
+            </div>
+
+            <div class="col-span-1 md:text-right">
+                <h4 class="text-xs font-bold uppercase tracking-[0.3em] text-white/20 mb-8">Contato</h4>
+                <p class="text-white/60 text-lg font-bold mb-4">diego.rosa@design.pro</p>
+                <p class="text-white/30 text-sm">Curitiba, PR — Brasil</p>
+            </div>
+        </div>
+        
+        <div class="max-w-7xl mx-auto mt-32 pt-10 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-6">
+            <div class="text-[9px] text-white/10 uppercase tracking-[0.5em]">
+                © 2026 Diego Luiz de Souza Rosa • Todos os direitos reservados
+            </div>
+            <div class="flex gap-8 text-[9px] text-white/10 uppercase tracking-[0.3em]">
+                <a href="#" class="hover:text-white transition-colors">Termos de Uso</a>
+                <a href="#" class="hover:text-white transition-colors">Privacidade</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Swiper JS -->
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
+    <!-- GSAP Animations -->
+    <script>
+        // Initialize Swiper
+        document.querySelectorAll('.vip-swiper-gallery').forEach(el => {
+            const container = el.closest('.relative');
+            new Swiper(el, {
+                loop: true,
+                slidesPerView: 1,
+                spaceBetween: 20,
+                centeredSlides: false,
+                autoplay: {
+                    delay: 3000,
+                    disableOnInteraction: false,
+                },
+                speed: 1000,
+                navigation: {
+                    nextEl: container.querySelector('.swiper-button-next'),
+                    prevEl: container.querySelector('.swiper-button-prev'),
+                },
+                pagination: {
+                    el: container.querySelector('.swiper-pagination'),
+                    clickable: true,
+                },
+                breakpoints: {
+                    320: {
+                        slidesPerView: 1.2,
+                        spaceBetween: 15,
+                    },
+                    640: {
+                        slidesPerView: 2.2,
+                        spaceBetween: 20,
+                    },
+                    1024: {
+                        slidesPerView: 3,
+                        spaceBetween: 30,
+                    }
+                }
+            });
+        });
+
+        gsap.registerPlugin(ScrollTrigger);
+
+        // Hero Entrance
+        const tl = gsap.timeline();
+        tl.from(".hero-badge", {
+            y: 20,
+            opacity: 0,
+            duration: 0.8,
+            ease: "power3.out"
+        })
+        .from(".hero-title", {
+            y: 100,
+            opacity: 0,
+            duration: 1.2,
+            ease: "power4.out"
+        }, "-=0.4")
+        .from(".hero-sub", {
+            y: 30,
+            opacity: 0,
+            duration: 1,
+            ease: "power3.out"
+        }, "-=0.8")
+        .from(".hero-btn", {
+            y: 30,
+            opacity: 0,
+            duration: 1,
+            ease: "power3.out"
+        }, "-=0.8");
+
+        // Scroll Reveal
+        gsap.utils.toArray(".reveal").forEach(elem => {
+            gsap.from(elem, {
+                scrollTrigger: {
+                    trigger: elem,
+                    start: "top 90%",
+                    toggleActions: "play none none none"
+                },
+                y: 40,
+                opacity: 0,
+                duration: 1.2,
+                ease: "power3.out"
+            });
+        });
+
+        // Smooth Scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    window.scrollTo({
+                        top: target.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
